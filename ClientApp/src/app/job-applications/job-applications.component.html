@@ -1,0 +1,42 @@
+<div class="bg-body-secondary text-center py-5 rounded-2">
+    <h1 class="display-6 fw-bold">
+        Job Applications
+    </h1>
+</div>
+
+<div class="row mt-5">
+    <div class="col-6">
+        <app-job-application-form />
+    </div>
+
+    <div class="col-6">
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-start mb-2 border px-4 py-3 rounded-3" *ngFor="let jobApplication of jobApplicationService.jobApplications">
+                <div class="flex-grow-1 mouse-hover">
+                    <div class="fw-bold">
+                        {{ jobApplication.companyName }}
+                    </div>
+                    <div>
+                        {{ jobApplication.position }}
+                    </div>
+                    <div>
+                        {{ jobApplication.status }}
+                    </div>
+                    <div>
+                        {{ jobApplication.dateApplied }}
+                    </div>
+                </div>
+
+                <div>
+                    <span class="text-secondary icon-spacing">
+                        <i class="fa-solid fa-trash fa-lg mouse-hover" (click)="onDelete(jobApplication.id)"></i>
+                    </span>
+
+                    <span class="text-secondary icon-spacing">
+                        <i class="fa-solid fa-pen fa-lg mouse-hover" (click)="populateForm(jobApplication)"></i>
+                    </span>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

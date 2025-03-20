@@ -1,0 +1,61 @@
+<form #form="ngForm" (submit)="onSubmit(form)" [class.submitted]="jobApplicationService.formSubmitted" novalidate>
+    <!-- Hidden input for the ID -->
+    <input type="hidden" name="id" [value]="jobApplicationService.jobApplicationForm.id">
+
+    <!-- Company name -->
+    <div class="mb-3">
+        <label>Company Name</label>
+        <input class="form-control form-control-lg"
+            placeholder="Name of the Company"
+            #companyName="ngModel"
+            name="companyName"
+            [(ngModel)]="jobApplicationService.jobApplicationForm.companyName"
+            required
+            maxlength="50"
+        >
+    </div>
+
+    <!-- Position -->
+    <div class="mb-3">
+        <label>Position</label>
+        <input class="form-control form-control-lg"
+            placeholder="Job Position Applied For"
+            #position="ngModel"
+            name="position"
+            [(ngModel)]="jobApplicationService.jobApplicationForm.position"
+            required
+            maxlength="50"
+        >
+    </div>
+
+    <!-- Status -->
+    <div class="mb-3">
+        <label>Status</label>
+        <input class="form-control form-control-lg"
+            placeholder="Current status of the Application"
+            #status="ngModel"
+            name="status"
+            [(ngModel)]="jobApplicationService.jobApplicationForm.status"
+            required
+        >
+    </div>
+
+    <!-- Date Applied -->
+    <div class="mb-3">
+        <label>Date Applied</label>
+        <input class="form-control form-control-lg"
+            placeholder="Date the Application was Submitted"
+            #dateApplied="ngModel"
+            name="dateApplied"
+            [(ngModel)]="jobApplicationService.jobApplicationForm.dateApplied"
+            required
+        >
+    </div>
+
+    <!-- Submit button -->
+    <div class="d-grid">
+        <button class="btn btn-lg btn-success" type="submit">
+            Submit
+        </button>
+    </div>
+</form>
