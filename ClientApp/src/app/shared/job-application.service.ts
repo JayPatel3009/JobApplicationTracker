@@ -8,7 +8,7 @@ import { NgForm } from '@angular/forms';
   providedIn: 'root'
 })
 export class JobApplicationService {
-  private url: string = environment.apiBaseUrl +'/JobApplications'
+  private url: string = `${environment.apiBaseUrl}/JobApplications`;
 
   public jobApplications: JobApplication[] = [];
 
@@ -34,10 +34,10 @@ export class JobApplicationService {
     this.http.post(this.url, this.jobApplicationForm);
 
   putJobApplication = () =>
-    this.http.put(this.url + '/' + this.jobApplicationForm.id, this.jobApplicationForm);
+    this.http.put(`${this.url}/${this.jobApplicationForm.id}`, this.jobApplicationForm);
 
   deleteJobApplication = (id: number) =>
-    this.http.delete(this.url + '/' + id);
+    this.http.delete(`${this.url}/${id}`);
 
   resetForm(form: NgForm) {
     form.form.reset();

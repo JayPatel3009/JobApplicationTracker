@@ -15,6 +15,8 @@ import { take } from 'rxjs';
 })
 export class JobApplicationsComponent implements OnInit {
 
+  public activeActionId: number | null = null;
+
   private destroyRef = inject(DestroyRef);
 
   constructor(
@@ -49,7 +51,7 @@ export class JobApplicationsComponent implements OnInit {
   }
 
   onDelete(id: number): void {
-    if (confirm('Are you sure to delete this record?'))
+    if (!confirm('Are you sure to delete this record?'))
       return;
 
     this.jobApplicationService.deleteJobApplication(id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
@@ -61,6 +63,14 @@ export class JobApplicationsComponent implements OnInit {
         console.error('Error deleting job application:', err);
       }
     });
+  }
+
+  toggleActions(jobApplicationId: number): void {
+    this.activeActionId = this.activeActionId === jobApplicationId ? null : jobApplicationId;
+  }
+
+  closeActions(): void {
+    this.activeActionId = null;
   }
 
   private openDialogAndRefresh(config: MatDialogConfig): void {
