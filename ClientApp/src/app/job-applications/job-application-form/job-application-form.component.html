@@ -31,25 +31,26 @@
     <!-- Status -->
     <div class="mb-3">
         <label>Status</label>
-        <input class="form-control form-control-lg"
-            placeholder="Current status of the Application"
+        <select class="form-control form-control-lg"
             #status="ngModel"
             name="status"
             [(ngModel)]="jobApplicationService.jobApplicationForm.status"
-            required
-        >
+            required>
+        <option [ngValue]="null" disabled selected>Please select</option>
+        <option *ngFor="let status of jobApplicationStatus" [value]="status">{{ status }}</option>
+        </select>
     </div>
 
     <!-- Date Applied -->
     <div class="mb-3">
         <label>Date Applied</label>
-        <input class="form-control form-control-lg"
+        <input type="datetime-local"
+            class="form-control form-control-lg"
             placeholder="Date the Application was Submitted"
             #dateApplied="ngModel"
             name="dateApplied"
             [(ngModel)]="jobApplicationService.jobApplicationForm.dateApplied"
-            required
-        >
+            required>
     </div>
 
     <!-- Submit button -->

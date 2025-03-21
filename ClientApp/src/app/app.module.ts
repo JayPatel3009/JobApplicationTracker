@@ -9,6 +9,7 @@ import { JobApplicationFormComponent } from './job-applications/job-application-
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { DateFormatPipe } from './shared/date-format.pipe';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ToastrModule } from 'ngx-toastr';
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule, // required animations module
-    ToastrModule.forRoot(), // ToastrModule added 
+    ToastrModule.forRoot(), // ToastrModule added
+    DateFormatPipe
   ],
   providers: [],
   bootstrap: [AppComponent]

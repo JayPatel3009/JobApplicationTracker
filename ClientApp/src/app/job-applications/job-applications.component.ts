@@ -30,7 +30,7 @@ export class JobApplicationsComponent implements OnInit {
   onDelete(id: number) {
     if (confirm('Are you sure to delete this record?'))
       this.jobApplicationService.deleteJobApplication(id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
-        next: (res) => {
+        next: () => {
           this.jobApplicationService.refreshList();
           this.toastr.error('Deleted successfully', 'Job Application');
         },

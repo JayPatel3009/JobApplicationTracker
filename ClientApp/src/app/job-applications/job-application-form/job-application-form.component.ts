@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { JobApplicationService } from '../../shared/job-application.service';
 import { NgForm } from '@angular/forms';
 import { take } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { JobApplicationStatus } from '../../shared/enums';
 
 @Component({
   selector: 'app-job-application-form',
@@ -10,12 +11,18 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './job-application-form.component.html',
   styleUrl: './job-application-form.component.css'
 })
-export class JobApplicationFormComponent {
+export class JobApplicationFormComponent implements OnInit {
+
+  jobApplicationStatus: string[] = [];
 
   constructor(
     public jobApplicationService: JobApplicationService,
     private toastr: ToastrService
   ) { }
+
+  ngOnInit() {
+    this.jobApplicationStatus = Object.values(JobApplicationStatus);
+  }
 
   public onSubmit(form: NgForm) {
     this.jobApplicationService.formSubmitted = true;
