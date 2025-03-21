@@ -124,7 +124,7 @@ The frontend is built using Angular Framework which uses TypeScript, HTML, and C
 
 - ✅ Swagger UI Documentation
 - ✅ Frontend Pagination
-- ✅ Clean UI Styling with detail cards
+- ✅ Clean UI Styling
 
 ## Extra Features Implemented
 
