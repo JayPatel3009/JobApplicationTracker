@@ -56,7 +56,7 @@ export class JobApplicationFormComponent implements OnInit {
   private handleSubmissionResponse(form: NgForm, observable: any, toastMessage: string, toastType: 'success' | 'info'): void {
     observable.pipe(take(1)).subscribe({
       next: () => {
-        this.jobApplicationService.refreshList();
+        this.jobApplicationService.refreshList(this.jobApplicationService.currentPage, this.jobApplicationService.pageSize);
         this.jobApplicationService.resetForm(form);
         if (toastType === 'success') {
           this.toastr.success(toastMessage, 'Job Application');

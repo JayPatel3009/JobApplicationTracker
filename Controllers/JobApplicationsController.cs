@@ -16,7 +16,7 @@ namespace JobApplicationTrackerAPI.Controllers
 
         // GET api/JobApplications?pageNumber=1&pageSize=10
         [HttpGet]
-        public async Task<IActionResult> GetAllJobApplicationsAsync([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10) =>
+        public async Task<IActionResult> GetAllJobApplicationsAsync([FromQuery] int? pageNumber, [FromQuery] int? pageSize) =>
             Ok(await _jobApplicationRepository.GetAllJobApplicationsAsync(pageNumber, pageSize));
 
         // GET api/JobApplications/5

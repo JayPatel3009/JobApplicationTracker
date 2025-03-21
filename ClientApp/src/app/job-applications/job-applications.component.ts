@@ -14,8 +14,10 @@ import { take } from 'rxjs';
   styleUrl: './job-applications.component.css'
 })
 export class JobApplicationsComponent implements OnInit {
-
   public activeActionId: number | null = null;
+  public pageSize: number = 10;
+  public totalPages: number = 0;
+  public pages: number[] = [];
 
   private destroyRef = inject(DestroyRef);
 
@@ -26,7 +28,18 @@ export class JobApplicationsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.jobApplicationService.refreshList();
+    this.jobApplicationService.getJobApplications().pipe(takeUntilDestroyed(this.destroyRef)).subscribe((response: JobApplication[]) =>{
+      this.totalPages = Math.ceil(response.length / this.pageSize);
+      console.log(this.totalPages)
+      this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
+    });
+    this.jobApplicationService.refreshList(this.jobApplicationService.currentPage, this.jobApplicationService.pageSize);
+  }
+
+  changePage(page: number): void {
+    if (page < 1 || page > this.totalPages) return;
+    this.jobApplicationService.currentPage = page;
+    this.jobApplicationService.refreshList(this.jobApplicationService.currentPage, this.jobApplicationService.pageSize);
   }
 
   openCreateDialog(): void {
@@ -56,7 +69,7 @@ export class JobApplicationsComponent implements OnInit {
 
     this.jobApplicationService.deleteJobApplication(id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: () => {
-        this.jobApplicationService.refreshList();
+        this.jobApplicationService.refreshList(this.jobApplicationService.currentPage, this.jobApplicationService.pageSize);
         this.toastr.error('Deleted successfully', 'Job Application');
       },
       error: (err: any) => {
@@ -76,7 +89,7 @@ export class JobApplicationsComponent implements OnInit {
   private openDialogAndRefresh(config: MatDialogConfig): void {
     const dialogRef = this.dialog.open(JobApplicationFormComponent, config);
     dialogRef.afterClosed().pipe(take(1)).subscribe(() => {
-      this.jobApplicationService.refreshList();
+      this.jobApplicationService.refreshList(this.jobApplicationService.currentPage, this.jobApplicationService.pageSize);
     });
   }
 

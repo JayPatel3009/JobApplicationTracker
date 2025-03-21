@@ -1,25 +1,30 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment.development';
 import { JobApplication } from './job-application.model';
 import { NgForm } from '@angular/forms';
+import { take } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JobApplicationService {
-  private url: string = `${environment.apiBaseUrl}/JobApplications`;
-
   public jobApplications: JobApplication[] = [];
-
   public jobApplicationForm: JobApplication = new JobApplication();
-
   public formSubmitted: boolean = false;
+  public currentPage: number = 1;
+  public readonly pageSize: number = 10;
+
+  private url: string = `${environment.apiBaseUrl}/JobApplications`;
 
   constructor(private http: HttpClient) { }
 
-  refreshList() {
-    this.http.get(this.url)
+  refreshList(pageNumber?: number, pageSize?: number) {
+    const params = new HttpParams()
+      .set('pageNumber', pageNumber != null ? pageNumber.toString() : 'null')
+      .set('pageSize', pageSize != null ? pageSize.toString() : 'null');
+
+    this.http.get(this.url, { params })
       .subscribe({
         next: (res) => {
           this.jobApplications = res as JobApplication[];
@@ -27,8 +32,11 @@ export class JobApplicationService {
         error: (err) => {
           console.log(err);
         }
-      })
+      });
   }
+
+  getJobApplications = () =>
+    this.http.get<JobApplication[]>(this.url);
 
   postJobApplication = () =>
     this.http.post(this.url, this.jobApplicationForm);
