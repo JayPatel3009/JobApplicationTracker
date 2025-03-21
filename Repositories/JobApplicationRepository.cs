@@ -40,14 +40,9 @@ namespace JobApplicationTrackerAPI.Repositories
             return jobApplicationEntity;
         }
 
-        private async Task UpdateJobApplicationAsyncPrivate(JobApplication jobApplication)
-        {
-            _dbContext.JobApplications.Update(jobApplication);
-        }
-
         public async Task UpdateJobApplicationAsync(JobApplication jobApplication)
         {
-            _dbContext.Entry(jobApplication).State = EntityState.Modified;
+            _dbContext.JobApplications.Update(jobApplication);
 
             await _dbContext.SaveChangesAsync();
         }

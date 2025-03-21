@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { DateFormatPipe } from './shared/date-format.pipe';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { DateFormatPipe } from './shared/date-format.pipe';
     FormsModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
-    DateFormatPipe
+    DateFormatPipe,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

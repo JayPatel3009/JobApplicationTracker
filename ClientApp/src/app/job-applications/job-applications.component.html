@@ -2,29 +2,20 @@
     <h1 class="display-6 fw-bold">
         Job Applications
     </h1>
+
+    <!-- Create New Button -->
+    <button class="btn btn-primary mt-3" (click)="openCreateDialog()">Create New</button>
 </div>
 
 <div class="row mt-5">
-    <div class="col-6">
-        <app-job-application-form />
-    </div>
-
-    <div class="col-6">
+    <div class="col-12">
         <ul class="list-group">
             <li class="list-group-item d-flex justify-content-between align-items-start mb-2 border px-4 py-3 rounded-3" *ngFor="let jobApplication of jobApplicationService.jobApplications">
                 <div class="flex-grow-1 mouse-hover">
-                    <div class="fw-bold">
-                        {{ jobApplication.companyName }}
-                    </div>
-                    <div>
-                        {{ jobApplication.position }}
-                    </div>
-                    <div>
-                        {{ jobApplication.status }}
-                    </div>
-                    <div>
-                        {{ jobApplication.dateApplied | dateFormat }}
-                    </div>
+                    <div class="fw-bold"> {{ jobApplication.companyName }} </div>
+                    <div> {{ jobApplication.position }} </div>
+                    <div> {{ jobApplication.status }} </div>
+                    <div> {{ jobApplication.dateApplied | dateFormat }} </div>
                 </div>
 
                 <div>
@@ -33,7 +24,7 @@
                     </span>
 
                     <span class="text-secondary icon-spacing">
-                        <i class="fa-solid fa-pen fa-lg mouse-hover" (click)="populateForm(jobApplication)"></i>
+                        <i class="fa-solid fa-pen fa-lg mouse-hover" (click)="openEditDialog(jobApplication)"></i>
                     </span>
                 </div>
             </li>

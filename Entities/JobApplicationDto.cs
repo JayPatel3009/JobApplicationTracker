@@ -1,5 +1,4 @@
 ﻿using static JobApplicationTrackerAPI.Enums;
-using System.ComponentModel.DataAnnotations;
 
 namespace JobApplicationTrackerAPI.Entities
 {
