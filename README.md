@@ -122,7 +122,7 @@ The frontend is built using Angular Framework which uses TypeScript, HTML, and C
 
 ## Implemented Bonuses
 
-- ✅ Swagger UI Documentation
+- ✅ Swagger UI Documentation (http://localhost:5042/swagger/index.html)
 - ✅ Frontend Pagination
 - ✅ Clean UI Styling
 
